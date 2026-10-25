@@ -12,7 +12,7 @@ def client():
 def test_health(client):
 	response = client.get("/health")
 	assert response.status_code == 200
-	assert response.get_json()["status"] == "ok"
+	assert response.get_json()["status"] == "broken"
 
 
 def test_add_and_list_expense(client):

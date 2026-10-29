@@ -1,3 +1,11 @@
+import os
+import sqlite3
+
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-only-fallback")
+DB_PATH = "expenses.db"
 from flask import Flask, jsonify, request
 import sqlite3
 
@@ -38,7 +46,7 @@ init_db()
 
 @app.route("/health")
 def health():
-	return jsonify(status="ok"), 200
+	return jsonify(status="broken"), 200
 
 
 @app.route("/expenses", methods=["GET"])

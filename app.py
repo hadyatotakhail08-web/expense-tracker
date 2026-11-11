@@ -46,7 +46,7 @@ init_db()
 
 @app.route("/health")
 def health():
-	return jsonify(status="broken"), 200
+	    return jsonify(status="ok"), 200
 
 
 @app.route("/expenses", methods=["GET"])

@@ -62,4 +62,4 @@ jobs:
       - name: Health check
         run: |
           sleep 10
-          curl -f http://localhost/health
+          curl -f https://app.thehimma.com/health

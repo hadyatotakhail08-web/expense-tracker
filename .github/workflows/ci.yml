@@ -43,3 +43,23 @@ jobs:
           image-ref: ghcr.io/${{ github.repository }}:latest
           severity: HIGH,CRITICAL
           exit-code: "0"
+
+    deploy:
+    needs: build-image    # wait until the image is built AND scanned
+    runs-on: [self-hosted, web]
+    environment: production
+    steps:
+      - name: Pull latest code
+        run: |
+          cd /opt/expense-tracker
+          sudo git pull
+
+      - name: Rebuild and restart the app
+        run: |
+          cd /opt/expense-tracker
+          sudo docker compose up -d --build
+
+      - name: Health check
+        run: |
+          sleep 10
+          curl -f http://localhost/health

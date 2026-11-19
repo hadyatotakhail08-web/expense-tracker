@@ -52,7 +52,6 @@ jobs:
       - name: Pull latest code
         run: |
           cd /opt/expense-tracker
-          sudo rm -rf monitoring/alertmanager.yml monitoring/alert_rules.yml
           sudo git pull
       - name: Rebuild and restart the app
         run: |

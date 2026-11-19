@@ -49,11 +49,11 @@ jobs:
     runs-on: [self-hosted, web]
     environment: production
     steps:
-      - name: Pull latest code
+      -        - name: Pull latest code
         run: |
           cd /opt/expense-tracker
+          sudo rm -rf monitoring/alertmanager.yml monitoring/alert_rules.yml
           sudo git pull
-
       - name: Rebuild and restart the app
         run: |
           cd /opt/expense-tracker

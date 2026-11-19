@@ -1,4 +1,14 @@
 services:
+  app:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "5050:5050"
+    volumes:
+      - expense-data:/app
+    restart: always
+
   node-exporter:
     image: prom/node-exporter:v1.8.2
     pid: host
@@ -18,21 +28,17 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
 
-    alertmanager:
+  alertmanager:
     image: prom/alertmanager:v0.27.0
-    environment:
-      - GMAIL_APP_PASSWORD=yourgmailapppassword
     volumes:
       - ./monitoring/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
-  app:
-    build: .
-    env_file:
-      - .env
-    ports:
-      - "5050:5050"
+
+  grafana:
+    image: grafana/grafana:11.2.0
     volumes:
-      - expense-data:/app
-    restart: always
+      - grafana-data:/var/lib/grafana
 
 volumes:
   expense-data:
+  prometheus-data:
+  grafana-data:

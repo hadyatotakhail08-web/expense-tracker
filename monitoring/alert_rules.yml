@@ -1,29 +1,29 @@
 groups:
-	- name: expense-tracker-alerts
-		rules:
-			- alert: AppDown
-				expr: up{job="expense-app"} == 0
-				for: 2m
-				labels:
-					severity: critical
-				annotations:
-					summary: "The expense tracker app is unreachable by Prometheus"
-					description: "Prometheus has not been able to scrape {{ $labels.job }} for 2 minutes."
+  - name: expense-tracker-alerts
+    rules:
+      - alert: AppDown
+        expr: up{job="expense-app"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "The expense tracker app is unreachable by Prometheus"
+          description: "Prometheus has not been able to scrape {{ $labels.job }} for 2 minutes."
 
-			- alert: HighCPU
-				expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 85
-				for: 5m
-				labels:
-					severity: warning
-				annotations:
-					summary: "CPU usage above 85% for 5 minutes"
-					description: "The server is running hot: {{ $value }}% average CPU on {{ $labels.instance }}."
+      - alert: HighCPU
+        expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "CPU usage above 85% for 5 minutes"
+          description: "The server is running hot: {{ $value }}% average CPU on {{ $labels.instance }}."
 
-			- alert: LowDiskSpace
-				expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) < 0.10
-				for: 10m
-				labels:
-					severity: warning
-				annotations:
-					summary: "Less than 10% disk space free"
-					description: "The root filesystem has {{ with printf \"%.0f\" $value }}{{ . }}% {{ end }}... check unused Docker images (docker image prune)."
+      - alert: LowDiskSpace
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) < 0.10
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Less than 10% disk space free"
+          description: "The root filesystem has {{ with printf \"%.0f\" $value }}{{ . }}% {{ end }}... check unused Docker images (docker image prune)."

@@ -24,18 +24,27 @@ services:
     ports:
       - "127.0.0.1:9090:9090"
     volumes:
-      ... (rest unchanged)
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/alert_rules.yml:/etc/prometheus/alert_rules.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
 
   alertmanager:
     image: prom/alertmanager:v0.27.0
     ports:
       - "127.0.0.1:9093:9093"
     volumes:
-      ... (rest unchanged)
+      - ./monitoring/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
 
   grafana:
     image: grafana/grafana:11.2.0
     ports:
       - "127.0.0.1:3000:3000"
     volumes:
-      ... (rest unchanged)
+      - grafana-data:/var/lib/grafana
+
+volumes:
+  expense-data:
+  prometheus-data:
+  grafana-data:

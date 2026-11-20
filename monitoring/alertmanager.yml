@@ -12,5 +12,5 @@ receivers:
         from: "hadyatotakhail08@gmail.com"
         smarthost: "smtp.gmail.com:587"
         auth_username: "hadyatotakhail08@gmail.com"
-        auth_password: "REPLACE_ME"
+        auth_password: "REMOVED"
         require_tls: true

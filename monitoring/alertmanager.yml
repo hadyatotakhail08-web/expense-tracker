@@ -13,4 +13,5 @@ receivers:
         smarthost: "smtp.gmail.com:587"
         auth_username: "hadyatotakhail08@gmail.com"
         auth_password: "REMOVED"
+        send_resolved: true
         require_tls: true

@@ -1,0 +1,17 @@
+ route:
+  receiver: gmail-notifications
+  group_by: ['alertname']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 3h
+
+receivers:
+  - name: gmail-notifications
+    email_configs:
+      - to: "hadyatotakhail08@gmail.com"
+        from: "hadyatotakhail08@gmail.com"
+        smarthost: "smtp.gmail.com:587"
+        auth_username: "hadyatotakhail08@gmail.com"
+        auth_password: "REPLACE_ME"
+        send_resolved: true 
+        require_tls: true

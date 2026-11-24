@@ -4,3 +4,4 @@ __pycache__/
 .env
 monitoring/alertmanager.yml
 monitoring/alertmanager.yml
+replacements.txt
